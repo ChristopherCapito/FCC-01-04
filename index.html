@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Quickchart Documentation</title>
+  </head>
+  <body>
+    <nav id="navbar">
+      <header>
+        <h1>Quickchart Documentation</h1>
+      </header>
+      <a class="nav-link" href="#create_a_chart_using_a_single_url"
+        >Create a chart using a single URL</a
+      >
+      <a class="nav-link" href="#how_it_works">How It Works</a>
+      <a class="nav-link" href="#customize_your_chart">Customize Your Chart</a>
+      <a class="nav-link" href="#advanced_API">Advanced API</a>
+      <a class="nav-link" href="#chart_types">Chart Types</a>
+    </nav>
+
+    <main id="main-doc">
+      <!-- 5 of these -->
+      <section class="main-section" id="create_a_chart_using_a_single_url">
+        <header><h1>Create a chart using a single URL</h1></header>
+        <div class="content">
+          <code
+            >&lt;img
+            src="https://quickchart.io/chart?width=500&height=300&c={type:'bar',data:{labels:['January','February','March','April',
+            'May'],
+            datasets:[{label:'Dogs',data:[50,60,70,180,190]},{label:'Cats',data:[100,200,300,400,500]}]}}"></code
+          >
+          <img
+            src="https://quickchart.io/chart?bkg=white&c={type:%27bar%27,data:{labels:[%27January%27,%27February%27,%27March%27,%27April%27,%20%27May%27],datasets:[{label:%27Dogs%27,data:[50,60,70,180,190]},{label:%27Cats%27,data:[100,200,300,400,500]}]}}"
+            alt=""
+          />
+          <p class="long">
+            This service is a replacement for the
+            <a href="https://developers.google.com/chart/image/"
+              >Google Image Charts API</a
+            >, which turned off on March 14, 2019. It can also generate chart
+            PDFs and QR codes.
+          </p>
+        </div>
+      </section>
+      <section class="main-section" id="how_it_works">
+        <header><h1>How It Works</h1></header>
+        <div class="content">
+          <p class="long">
+            Chart images are defined by their URLs. Each URL contains a
+            JSON/Javascript object that includes all the data and display
+            options. These options follow the popular open-source graphing
+            library Chart.js. Use the
+            <a href="https://www.chartjs.org/docs/latest/charts/"
+              >documentation</a
+            >
+            to define your chart. Once you've written your config, render it as
+            an image with https://quickchart.io/chart?c=[[insert config here]].
+            Try the realtime editor below:
+          </p>
+          <code
+            >// Edit me! { type: 'bar', data: { labels: ['January', 'February',
+            'March', 'April', 'May'], datasets: [{ label: 'Dogs', data: [ 50,
+            60, 70, 180, 190 ] }, { label: 'Cats', data: [ 100, 200, 300, 400,
+            500 ] }] } }</code
+          >
+          <img src="https://quickchart.io/chart?bkg=white&c={%20%20type:%20%27bar%27,%20%20data:%20{%20%20%20%20labels:%20[%27January%27,%20%27February%27,%20%27March%27,%20%27April%27,%20%27May%27],%20%20%20%20datasets:%20[{%20%20%20%20%20%20label:%20%27Dogs%27,%20%20%20%20%20%20data:%20[%2050,%2060,%2070,%20180,%20190%20]%20%20%20%20},%20{%20%20%20%20%20%20label:%20%27Cats%27,%20%20%20%20%20%20data:%20[%20100,%20200,%20300,%20400,%20500%20]%20%20%20%20}]%20%20}}" alt="" srcset="">
+          <p class="long">
+            The API also lets you generate charts in
+            <a
+              href="https://quickchart.io/chart?f=pdf&bkg=white&c={%20%20type:%20%27bar%27,%20%20data:%20{%20%20%20%20labels:%20[%27January%27,%20%27February%27,%20%27March%27,%20%27April%27,%20%27May%27],%20%20%20%20datasets:%20[{%20%20%20%20%20%20label:%20%27Dogs%27,%20%20%20%20%20%20data:%20[%2050,%2060,%2070,%20180,%20190%20]%20%20%20%20},%20{%20%20%20%20%20%20label:%20%27Cats%27,%20%20%20%20%20%20data:%20[%20100,%20200,%20300,%20400,%20500%20]%20%20%20%20}]%20%20}}"
+              >PDF format</a
+            >
+            (see below for all customization options).
+          </p>
+        </div>
+      </section>
+      <section class="main-section" id="customize_your_chart">
+        <header><h1>Customize Your Chart</h1></header>
+        <div class="content">
+          <p class="long">
+            Let's get creative. The example below uses custom background colors,
+            title, legend, stacked bars, axis labels, and data labels:
+          </p>
+          <code>
+            { type: 'bar', data: { labels: ['January', 'February', 'March',
+            'April', 'May'], datasets: [{ label: 'Dogs', backgroundColor:
+            'chartreuse', data: [ 50, 60, 70, 180, 190 ] }, { label: 'Cats',
+            backgroundColor: 'gold', data: [ 100, 200, 300, 400, 500 ] }] },
+            options: { title: { display: true, text: 'Total Revenue (billions)',
+            fontColor: 'hotpink', fontSize: 32, }, legend: { position: 'bottom',
+            }, scales: { xAxes: [{stacked: true}], yAxes: [{ stacked: true,
+            ticks: { callback: function(value) { return '$' + value; } } }], },
+            plugins: { datalabels: { display: true, font: { style: 'bold', }, },
+            }, }, }
+          </code>
+          <img src="https://quickchart.io/chart?bkg=white&c=%20%20%20%20%20%20%20%20{%20%20%20%20%20%20%20%20%20%20type:%20%27bar%27,%20%20%20%20%20%20%20%20%20%20data:%20{%20%20%20%20%20%20%20%20%20%20%20%20labels:%20[%27January%27,%20%27February%27,%20%27March%27,%20%27April%27,%20%27May%27],%20%20%20%20%20%20%20%20%20%20%20%20datasets:%20[{%20%20%20%20%20%20%20%20%20%20%20%20%20%20label:%20%27Dogs%27,%20%20%20%20%20%20%20%20%20%20%20%20%20%20backgroundColor:%20%27chartreuse%27,%20%20%20%20%20%20%20%20%20%20%20%20%20%20data:%20[%2050,%2060,%2070,%20180,%20190%20]%20%20%20%20%20%20%20%20%20%20%20%20},%20{%20%20%20%20%20%20%20%20%20%20%20%20%20%20label:%20%27Cats%27,%20%20%20%20%20%20%20%20%20%20%20%20%20%20backgroundColor:%20%27gold%27,%20%20%20%20%20%20%20%20%20%20%20%20%20%20data:%20[%20100,%20200,%20300,%20400,%20500%20]%20%20%20%20%20%20%20%20%20%20%20%20}]%20%20%20%20%20%20%20%20%20%20},%20%20%20%20%20%20%20%20%20%20options:%20{%20%20%20%20%20%20%20%20%20%20%20%20title:%20{%20%20%20%20%20%20%20%20%20%20%20%20%20%20display:%20true,%20%20%20%20%20%20%20%20%20%20%20%20%20%20text:%20%27Total%20Revenue%20(billions)%27,%20%20%20%20%20%20%20%20%20%20%20%20%20%20fontColor:%20%27hotpink%27,%20%20%20%20%20%20%20%20%20%20%20%20%20%20fontSize:%2032,%20%20%20%20%20%20%20%20%20%20%20%20},%20%20%20%20%20%20%20%20%20%20%20%20legend:%20{%20%20%20%20%20%20%20%20%20%20%20%20%20%20position:%20%27bottom%27,%20%20%20%20%20%20%20%20%20%20%20%20},%20%20%20%20%20%20%20%20%20%20%20%20scales:%20{%20%20%20%20%20%20%20%20%20%20%20%20%20%20xAxes:%20[{stacked:%20true}],%20%20%20%20%20%20%20%20%20%20%20%20%20%20yAxes:%20[{%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20stacked:%20true,%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ticks:%20{%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20callback:%20function(value)%20{%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20return%20%27$%27%20%2B%20value;%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20}%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20}%20%20%20%20%20%20%20%20%20%20%20%20%20%20}],%20%20%20%20%20%20%20%20%20%20%20%20},%20%20%20%20%20%20%20%20%20%20%20%20plugins:%20{%20%20%20%20%20%20%20%20%20%20%20%20%20%20datalabels:%20{%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20display:%20true,%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20font:%20{%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20style:%20%27bold%27,%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20},%20%20%20%20%20%20%20%20%20%20%20%20%20%20},%20%20%20%20%20%20%20%20%20%20%20%20},%20%20%20%20%20%20%20%20%20%20},%20%20%20%20%20%20%20%20}" alt="" srcset="">
+          <p class="long">
+            You can use any static customization option available in Chart.js.
+            The best place to learn the extent of customization options is
+            through the
+            <a href="https://www.chartjs.org/docs/latest/configuration/"
+              >documentation</a
+            >.
+          </p>
+          <p class="long">
+            A couple things to remember when customizing your chart:
+          </p>
+          <ul class="long">
+            <li>
+              <strong
+                >We recommend that you
+                <a href="https://www.urlencoder.io/">URL-encode</a> the entire
+                chart config</strong
+              >
+              or base64 encode your chart config and specify encoding=base64. If
+              not encoded, you will run into problems with the # symbol and
+              other special characters.
+            </li>
+            <li>
+              Interactivity and animations are not supported (this service
+              produces static images)
+            </li>
+          </ul>
+          <p class="long">
+            We also provide these additional options as query parameters:
+          </p>
+          <ul class="long">
+            <li>width=500: Set the width of the image. Abbreviated as "w"</li>
+            <li>height=300: Set the height of the image. Abbreviated as "h"</li>
+            <li>
+              backgroundColor=transparent: Set the background of the chart
+              canvas. Abbreviated as "bkg"
+            </li>
+            <li>
+              format=png: Set the format of your output. Currently the two
+              supported output formats are PNG and PDF. Abbreviated as "f"
+            </li>
+            <li>
+              encoding=url: Select the encoding of your "chart" parameter.
+              Accepted values are url (default) and base64.
+            </li>
+          </ul>
+          <p class="long">
+            Combine these parameters in your query string. For example:
+            /chart?width=500&height=300&format=pdf&c={...}
+          </p>
+        </div>
+      </section>
+      <section class="main-section" id="advanced_API">
+        <header><h1>Advanced API</h1></header>
+        <div class="content">
+          <h2 class="long">POST endpoint</h2>
+          <p class="long">
+            If your chart is large or complicated, you may prefer to send a
+            <strong>POST request</strong> rather than a GET request. This avoids
+            limitations on URL length and means you don't have to worry about
+            URL encoding. The /chart POST endpoint takes the same parameters as
+            above via the following JSON object:
+          </p>
+          <code class="long"
+            >{ "backgroundColor": "transparent", "width": 500, "height": 300,
+            "format": "png", "chart": {...}, }</code
+          >
+          <p class="long">
+            Note that if you want to include Javascript code in chart (e.g. to
+            format labels), you'll have to send the parameter as a string rather
+            than a JSON object.
+          </p>
+          <h2 class="long">Short URLs</h2>
+          <p class="long">
+            You may like to create a shorter URL for your charts, especially if
+            you are sending them via email or SMS. Send a POST request to
+            https://quickchart.io/chart/create per the above POST spec. For
+            example:
+          </p>
+          <code class="long"
+            >curl -X POST \ -H 'Content-Type: application/json' \ -d '{"chart":
+            {"type": "bar", "data": {"labels": ["Hello", "World"], "datasets":
+            [{"label": "Foo", "data": [1, 2]}]}}}' \
+            https://quickchart.io/chart/create
+          </code>
+          <p class="long">You will get a response that looks like this:</p>
+          <code class="long"
+            >{ "success": true, "url":
+            "https://quickchart.io/chart/render/9a560ba4-ab71-4d1e-89ea-ce4741e9d232"
+            }
+          </code>
+          <p class="long">
+            Go to the
+            <a
+              href="https://quickchart.io/chart/render/9a560ba4-ab71-4d1e-89ea-ce4741e9d232"
+              >url in the response</a
+            >
+            to render your chart.
+          </p>
+          <p class="long">Note the following caveats:</p>
+          <ul class="long">
+            <li>
+              This feature is in beta as of its release on August 26, 2019.
+            </li>
+            <li>
+              Request inputs are not validated before the URL is created. The
+              chart is only rendered when the URL is visited.
+            </li>
+            <li>Saved charts expire after 3 months.</li>
+          </ul>
+        </div>
+      </section>
+      <section class="main-section" id="chart_types">
+        <header><h1>Chart Types</h1></header>
+        <div class="content">
+            <p class="long">
+                I don't know if you can tell, but the options are endless and I am really tired of copying this documentation over.
+              </p>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+  $(document).ready(function(){
+    // Add smooth scrolling to all links
+    $("a").on('click', function(event) {
+  
+      // Make sure this.hash has a value before overriding default behavior
+      if (this.hash !== "") {
+        // Prevent default anchor click behavior
+        event.preventDefault();
+  
+        // Store hash
+        var hash = this.hash;
+  
+        // Using jQuery's animate() method to add smooth page scroll
+        // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+        $('html, body').animate({
+          scrollTop: $(hash).offset().top
+        }, 800, function(){
+  
+          // Add hash (#) to URL when done scrolling (default click behavior)
+          window.location.hash = hash;
+        });
+      } // End if
+    });
+  });
+  </script>
+
+</html>
